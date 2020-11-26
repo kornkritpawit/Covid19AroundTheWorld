@@ -21,10 +21,7 @@ def get_world_currency_rates():
     return models.Currency(rates,base,date)
 
 def get_world_currency_rates_with_symbols(sym):
-    if sym:
-        response = requests.get("http://data.fixer.io/api/latest?access_key="+access_key+"&symbols="+sym)
-    else:
-        response = requests.get("http://data.fixer.io/api/latest?access_key="+access_key)
+    response = requests.get("http://data.fixer.io/api/latest?access_key="+access_key+"&symbols="+sym)
     date=response.json()["date"]
     rates=response.json()["rates"]
     base=response.json()["base"]
