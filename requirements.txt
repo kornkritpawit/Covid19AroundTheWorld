@@ -1,1 +1,2 @@
-Flask~=1.1.2
+-r autogen/requirements.txt
+PyMySQL

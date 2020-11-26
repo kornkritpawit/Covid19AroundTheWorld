@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: Asia Covid-19 API
+  description:
+    This API provides historical rainfall data over upper Chaopraya river basin between 1987
+    and 2019.  Raw data provided by Thai Meteorological Department (TMD).
+  version: 1.0.0
+servers:
+- url: /covid-api/v1
+paths:
+  /symbols:
+    get:
+      summary: Returns a list of symbols.
+      operationId: controller.get_world_currency_symbols
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Symbols'
+  /currency:
+    get:
+      summary: Returns a list of currencies.
+      operationId: controller.get_world_currency_rates
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Currency'
+  /currency/{sym}:
+    parameters:
+    - name: sym
+      in: path
+      required: false
+      schema:
+        type : string
+    get:
+      summary: Returns complete details of the specified symbols of currency
+      operationId: controller.get_world_currency_rates_with_symbols
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Currency'
+
+
+
+components:
+  schemas:
+    Currency:
+      type: object
+      properties:
+        rates:
+          type: number
+        base:
+          type: string
+        date:
+          type: string
+    Symbols:
+      type: object
+      properties:
+        symbols:
+          type: string
+
