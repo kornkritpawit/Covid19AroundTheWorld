@@ -8,6 +8,33 @@ info:
 servers:
 - url: /covid-api/v1
 paths:
+  /covid/{country}/{date}:
+    get:
+      operationId: controller_get_covid_by_date_and_country
+      parameters:
+      - explode: false
+        in: path
+        name: country
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: date
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CovidCase'
+          description: Success
+      summary: Returns complete details of the specified covid all time
+      x-openapi-router-controller: openapi_server.controllers.default_controller
   /currency:
     get:
       operationId: controller_get_world_currency_rates
@@ -77,4 +104,17 @@ components:
       properties:
         symbols:
           type: string
+      type: object
+    CovidCase:
+      example:
+        country: country
+        confirmed: 0.8008281904610115
+        deaths: 6.027456183070403
+      properties:
+        country:
+          type: string
+        confirmed:
+          type: number
+        deaths:
+          type: number
       type: object
