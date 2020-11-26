@@ -50,6 +50,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Currency'
+  /covid/{country}/{date}:
+    parameters:
+      - name: country
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: date
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Returns complete details of the specified covid all time
+      operationId: controller.get_covid_by_date_and_country
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CovidCase'
 
 
 components:
@@ -68,4 +90,13 @@ components:
       properties:
         symbols:
           type: string
+    CovidCase:
+      type: object
+      properties:
+        country:
+          type: string
+        confirmed:
+          type: number
+        deaths:
+          type: number
 
