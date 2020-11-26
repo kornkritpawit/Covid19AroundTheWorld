@@ -37,7 +37,7 @@ paths:
     parameters:
     - name: sym
       in: path
-      required: false
+      required: true
       schema:
         type : string
     get:
@@ -50,7 +50,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Currency'
-
 
 
 components:
