@@ -72,7 +72,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CovidCase'
-
+  /weather/{city_name}:
+    parameters:
+      - name: city_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: unit
+        in: query
+        required: false
+        schema:
+          type: string
+        example: metric, imperial
+    get:
+      summary: Returns complete details of the weather on current time
+      operationId: controller.get_weather_currently_from_one_location
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather'
 
 components:
   schemas:
@@ -99,4 +121,22 @@ components:
           type: number
         deaths:
           type: number
-
+    Weather:
+      type: object
+      properties:
+        name:
+          type: string
+        country:
+          type: string
+        temp:
+          type: number
+        feels_like:
+          type: number
+        temp_min:
+          type: number
+        temp_max:
+          type: number
+        pressure:
+          type: number
+        humidity:
+          type: number
