@@ -1,37 +1,51 @@
-Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/2010_alcohol_consumption_by_country.csv', function(err, rows){
-      function unpack(rows, key) {
-          console.log(rows);
-          console.log(key);
-          return rows.map(function(row) { return row[key]; });
-      }
+function unpack(rows, key) {
+    return rows.map(function (row) {
+        return row[key];
+    });
+}
 
-      array = []
 
-      myObj = {
-          location: "Belarus",
-          alcohol: "17.5"
-      }
-      array.push(myObj)
-    country = [{location: "Australia", covid:"900"}
-    ,{location: "Canada", covid:"90"}]
-    var data = [{
+async function getCovidCase() {
+    const resp = await fetch('http://localhost:3000/graphql', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            query: `
+            {
+                covid19SituationSummaryAllCountry {
+                    countryName
+                    totalCases
+                }
+            }`
+        })
+    });
+    console.log(resp)
+    const json = await resp.json();
+    console.log(json)
+    let country = json.data.covid19SituationSummaryAllCountry;
+    console.log(country)
+    const data = [{
         type: 'choropleth',
         locationmode: 'country names',
-        locations: unpack(country, 'location'),
-        z: unpack(country, 'covid'),
-        text: unpack(country, 'location'),
+        locations: unpack(country, 'countryName'),
+        z: unpack(country, 'totalCases'),
+        text: unpack(country, 'countryName'),
         autocolorscale: true
     }];
 
-    var layout = {
-      // title: 'Pure alcohol consumption<br>among adults (age 15+) in 2010',
-      geo: {
-          projection: {
-              type: 'robinson'
-          }
-      }
+    const layout = {
+        // title: 'Pure alcohol consumption<br>among adults (age 15+) in 2010',
+        geo: {
+            projection: {
+                type: 'robinson'
+            }
+        }
     };
 
     Plotly.newPlot("myDiv", data, layout, {showLink: false});
+}
 
-});
+getCovidCase();
