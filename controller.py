@@ -31,8 +31,7 @@ def get_country_details(countryId):
 
 def get_sum_covid19_situation_world():
     with db_cursor() as cs:
-        
-        result = [models.Country(*row) for row in cs.fetchall()]
+
         return result
 
 def get_new_covid19_situation_world():
@@ -41,10 +40,36 @@ def get_new_covid19_situation_world():
 
 def get_sum_covid19_situation_in_all_country():
     with db_cursor() as cs:
+        cs.execute("""
+        SELECT CountryID,CountryName,MAX(TotalCase) as TotalCase , MAX(TotalDeath) as TotalDeath, MAX(TotalRecovered) as TotalRecovered,MAX(Date) as Date FROM
+        (SELECT CountryID as CountryID, CountryName, TotalCase, TotalDeath, Covid19Recovered.TotalRecovered as TotalRecovered , Covid19.Date as Date
+        FROM Country INNER JOIN Covid19 INNER JOIN Covid19Recovered 
+        WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
+        AND Country.CountryAlpha2 = Covid19Recovered.CountryAlpha2) c
+        GROUP BY CountryID,CountryName
+        """)
+        result = [models.Covid19CountrySum(*row) for row in cs.fetchall()]
         return result
 
 def get_new_covid19_situation_in_all_country():
     with db_cursor() as cs:
+        cs.execute("""
+        SELECT CountryID, CountryName, NewCase, NewDeath, Covid19.Date
+        FROM Country INNER JOIN Covid19 
+        WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
+        """)
+        result = [models.Covid19CountryNew(*row) for row in cs.fetchall()]
+        return result
+
+def get_new_covid19_situation_in_specific_country(countryId):
+    with db_cursor() as cs:
+        cs.execute("""
+        SELECT CountryID, CountryName, NewCase, NewDeath, Covid19.Date
+        FROM Country INNER JOIN Covid19 
+        WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
+        AND CountryID=%s
+        """, countryId)
+        result = [models.Covid19CountryNew(*row) for row in cs.fetchall()]
         return result
 
 def get_covid19_situation_total_cases():
@@ -71,22 +96,47 @@ def get_covid19_situation_new_recovered():
     with db_cursor() as cs:
         return result
 
-def get_covid19_information_in_specific_country():
+def get_covid19_information_in_specific_country(countryId):
     with db_cursor() as cs:
+
+        result = [models.Currency(*row) for row in cs.fetchall()]
         return result
 
 def get_currency_rates():
     with db_cursor() as cs:
+        cs.execute("""
+        SELECT CountryID, CountryName, CurrencyRate.Rate, CurrencySymbol.Symbol, CurrencyRate.Date 
+        FROM Country INNER JOIN CurrencySymbol INNER JOIN CurrencyRate 
+        WHERE CurrencySymbol.Symbol = CurrencyRate.SymbolAlpha
+        AND Country.CountryAlpha2 = CurrencySymbol.CountryAlpha2
+        """)
+        result = [models.Currency(*row) for row in cs.fetchall()]
         return result
 
-def get_currency_rate_in_specific_country():
+def get_currency_rate_in_specific_country(countryId):
     with db_cursor() as cs:
+        cs.execute("""
+        SELECT CountryID, CountryName, CurrencyRate.Rate, CurrencySymbol.Symbol, CurrencyRate.Date 
+        FROM Country INNER JOIN CurrencySymbol INNER JOIN CurrencyRate 
+        WHERE CurrencySymbol.Symbol = CurrencyRate.SymbolAlpha
+        AND Country.CountryAlpha2 = CurrencySymbol.CountryAlpha2 AND CountryID=%s
+        """, countryId)
+        result = [models.Currency(*row) for row in cs.fetchall()]
         return result
 
-def get_currency_unit_in_specific_country():
+def get_currency_unit_in_specific_country(countryId):
     with db_cursor() as cs:
+        cs.execute("""
+        SELECT CountryName, Symbol FROM
+        (SELECT CountryID, CountryName, CurrencyRate.Rate, CurrencySymbol.Symbol as Symbol, CurrencyRate.Date 
+        FROM Country INNER JOIN CurrencySymbol INNER JOIN CurrencyRate 
+        WHERE CurrencySymbol.Symbol = CurrencyRate.SymbolAlpha
+        AND Country.CountryAlpha2 = CurrencySymbol.CountryAlpha2 AND CountryID=%s) c
+        GROUP BY CountryName, Symbol
+        """, countryId)
+        result = [models.Currency(*row) for row in cs.fetchall()]
         return result
-        
+    
 
 # def get_world_currency_symbols():
 #     response = requests.get("http://data.fixer.io/api/symbols?access_key=" + access_key)
