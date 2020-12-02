@@ -87,7 +87,7 @@ paths:
 
   /covid19Situation/newCases/allCountry:
     get:
-      summary: Returns a list of covid-19 new cases of all country in latest date
+      summary: Returns a list of covid-19 new cases of all country
       operationId: controller.get_new_covid19_situation_in_all_country
       responses:
         200:
@@ -98,90 +98,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Covid19CountryNew'
-
-  /covid19Situation/totalCases:
-    get:
-      summary: Returns a list of total cases in all country in latest date
-      operationId: controller.get_covid19_situation_total_cases
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Covid19CountryTotal'
-
-  /covid19Situation/deathCases:
-    get:
-      summary: Returns a list of death cases in all country in latest date
-      operationId: controller.get_covid19_situation_death_cases
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Covid19CountrySumDeath'
-
-  /covid19Situation/recoveredCases:
-    get:
-      summary: Returns a list of death cases in all country in latest date
-      operationId: controller.get_covid19_situation_recovered_cases
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Covid19CountrySumRecovered'
-             
-  /covid19Situation/newCases:
-    get:
-      summary: Returns list of new cases occur in all country in latest date
-      operationId: controller.get_covid19_situation_new_cases
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Covid19CountryNewCases'
-
-  /covid19Situation/newDeath:
-    get:
-      summary: Returns list of new death occur in all country in latest date
-      operationId: controller.get_covid19_situation_new_death
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Covid19CountryNewDeath'
-
-  /covid19Situation/newRecovered:
-    get:
-      summary: Returns list of new recovered occur in all country in latest date
-      operationId: controller.get_covid19_situation_new_recovered
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Covid19CountryNewRecovered'
 
   /covid19Situation/{countryId}:
     parameters:
@@ -278,9 +194,9 @@ components:
       properties:
         totalCases:
           type: integer
-        deathCases:
+        totaldeathCases:
           type: integer
-        recoveredCases:
+        totalrecoveredCases:
           type: integer
         date:
           type: date
@@ -306,9 +222,9 @@ components:
           type: string
         totalCases:
           type: integer
-        deathCases:
+        totalDeathCases:
           type: integer
-        recoveredCases:
+        totalRecoveredCases:
           type: integer
         date:
           type: date
@@ -324,78 +240,6 @@ components:
           type: integer
         newDeath:
           type: integer
-        newRecovered:
-          type: integer
-        date:
-          type: date
-
-    Covid19CountryTotal:
-      type: object
-      properties:
-        countryId:
-          type: integer
-        countryName:
-          type: string
-        totalCases:
-          type: integer
-        date:
-          type: date
-
-    Covid19CountrySumDeath:
-      type: object
-      properties:
-        countryId:
-          type: integer
-        countryName:
-          type: string
-        totalDeathCases:
-          type: integer
-        date:
-          type: date
-
-    Covid19CountrySumRecovered:
-      type: object
-      properties:
-        countryId:
-          type: integer
-        countryName:
-          type: string
-        totalrecoveredCases:
-          type: integer
-        date:
-          type: date
-
-    Covid19CountryNewCases:
-      type: object
-      properties:
-        countryId:
-          type: integer
-        countryName:
-          type: string
-        newCases:
-          type: integer
-        date:
-          type: date
-
-    Covid19CountryNewDeath:
-      type: object
-      properties:
-        countryId:
-          type: integer
-        countryName:
-          type: string
-        newDeath:
-          type: integer
-        date:
-          type: date
-
-    Covid19CountryNewRecovered:
-      type: object
-      properties:
-        countryId:
-          type: integer
-        countryName:
-          type: string
         newRecovered:
           type: integer
         date:
@@ -444,143 +288,3 @@ components:
           type: string
         currencyUnit:
           type: string
-
-
-#   /symbols:
-#     get:
-#       summary: Returns a list of symbols.
-#       operationId: controller.get_world_currency_symbols
-#       responses:
-#         200:
-#           description: Success
-#           content:
-#             application/json:
-#               schema:
-#                 type: array
-#                 items:
-#                   $ref: '#/components/schemas/Symbols'
-#   /currency:
-#     get:
-#       summary: Returns a list of currencies.
-#       operationId: controller.get_world_currency_rates
-#       responses:
-#         200:
-#           description: Success
-#           content:
-#             application/json:
-#               schema:
-#                 items:
-#                   $ref: '#/components/schemas/Currency'
-#   /currency/{sym}:
-#     parameters:
-#     - name: sym
-#       in: path
-#       required: true
-#       schema:
-#         type : string
-#     get:
-#       summary: Returns complete details of the specified symbols of currency
-#       operationId: controller.get_world_currency_rates_with_symbols
-#       responses:
-#         200:
-#           description: Success
-#           content:
-#             application/json:
-#               schema:
-#                 $ref: '#/components/schemas/Currency'
-#   /covid/{country}/{date}:
-#     parameters:
-#       - name: country
-#         in: path
-#         required: true
-#         schema:
-#           type: string
-#       - name: date
-#         in: path
-#         required: true
-#         schema:
-#           type: string
-#     get:
-#       summary: Returns complete details of the specified covid all time
-#       operationId: controller.get_covid_by_date_and_country
-#       responses:
-#         200:
-#           description: Success
-#           content:
-#             application/json:
-#               schema:
-#                 $ref: '#/components/schemas/CovidCase'
-#   /weather/{city_name}:
-#     parameters:
-#       - name: city_name
-#         in: path
-#         required: true
-#         schema:
-#           type: string
-#       - name: unit
-#         in: query
-#         required: false
-#         schema:
-#           type: string
-#         example: metric, imperial
-#     get:
-#       summary: Returns complete details of the weather on current time
-#       operationId: controller.get_weather_currently_from_one_location
-#       responses:
-#         200:
-#           description: Success
-#           content:
-#             application/json:
-#               schema:
-#                 $ref: '#/components/schemas/Weather'
-
-
-
-
-
-
-
-# components:
-#   schemas:
-#     Currency:
-#       type: object
-#       properties:
-#         rates:
-#           type: number
-#         base:
-#           type: string
-#         date:
-#           type: string
-#     Symbols:
-#       type: object
-#       properties:
-#         symbols:
-#           type: string
-#     CovidCase:
-#       type: object
-#       properties:
-#         country:
-#           type: string
-#         confirmed:
-#           type: number
-#         deaths:
-#           type: number
-#     Weather:
-#       type: object
-#       properties:
-#         name:
-#           type: string
-#         country:
-#           type: string
-#         temp:
-#           type: number
-#         feels_like:
-#           type: number
-#         temp_min:
-#           type: number
-#         temp_max:
-#           type: number
-#         pressure:
-#           type: number
-#         humidity:
-#           type: number
