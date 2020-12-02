@@ -1,4 +1,4 @@
-# Covid-19 Around Asia
+# Covid-19 Around The World
 
 ![Asia](https://icon-library.com/images/asia-icon/asia-icon-4.jpg)
 
@@ -39,6 +39,12 @@ Python version 3.6 or greater is required.
    ```
    python app.py
    ```
+   The server will running on default configuration on http://localhost:8080/.
+6. Open second window command line. Open GraphQL accessible by this command.
+    ```
+   openapi-to-graphql --cors -u http://localhost:8080/covid-api/v1/ openapi/covid-api.yaml
+   ```
+   Default port is 8080. You can change to your port that you open python local server.
 
 ## Team members
 
