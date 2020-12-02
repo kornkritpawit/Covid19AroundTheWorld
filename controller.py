@@ -81,6 +81,7 @@ def get_new_covid19_situation_in_specific_country(countryName):
         WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
         AND CountryName=%s
         """, countryName)
+        print(countryName)
         result = [models.Covid19CountryNew(*row) for row in cs.fetchall()]
         return result
 
@@ -106,4 +107,16 @@ def get_currency_unit_in_specific_country(countryName):
         GROUP BY CountryName, Symbol
         """, countryName)
         result = [models.CurrencyUnit(*row) for row in cs.fetchall()]
+        return result
+
+def get_latest_covid19_by_continent(cont):
+    with db_cursor() as cs:
+        cs.execute("""
+        SELECT CountryID, Continent, Country.CountryName, NewCase, Covid19.Date
+        FROM Covid19 INNER JOIN Country 
+        WHERE Country.CountryAlpha3 = Covid19.CountryAlpha3 AND Continent=%s  
+        """, cont)
+        print(cont)
+        result = [models.Covid19Continent(*row) for row in cs.fetchall()]
+        print(result)
         return result
