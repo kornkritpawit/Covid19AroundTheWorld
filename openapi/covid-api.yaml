@@ -159,6 +159,26 @@ paths:
                 items:
                   $ref: '#/components/schemas/CurrencyUnit'
 
+  /covid19Situation/newCases/{continent}:
+    parameters:
+      - name: continent
+        in: path
+        required: true
+        schema:
+          type : string
+    get:
+      summary: Returns a list of covid-19 new cases of specific country
+      operationId: controller.get_new_covid19_situation_by_continent
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Covid19Continent'
+
 components:
   schemas:
     Country:
@@ -225,6 +245,18 @@ components:
         newCases:
           type: integer
         newDeath:
+          type: integer
+        date:
+          type: string
+
+    Covid19Continent:
+      type: object
+      properties:
+        continent:
+          type: string
+        location:
+          type: string
+        newCases:
           type: integer
         date:
           type: string
