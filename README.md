@@ -2,7 +2,11 @@
 
 ![Asia](https://icon-library.com/images/asia-icon/asia-icon-4.jpg)
 
-Our group will analyze the covid19 situation in the country in Asia. The first source will provide the covid19 cases in each country in Asia including the new covid19 case, the new death case and the recovered cases. The second source will provide the total population. The third source will provide all the information of flights that take place in each country. The last source will provide the currency rate in each country.
+Our group will analyze the covid19 situation in the country around the world. 
+- The first source will provide the covid-19 cases in each country around the world including the new covid-19 case, the new death case and the recovered cases. 
+- The second source will provide the total population. 
+- The third source will provide all the information of flights that take place in each country. 
+- The last source will provide the currency rate in each country and compare covid-19 situation with the currency rate.
 
 ## Requirement
 Python version 3.6 or greater is required.
@@ -39,6 +43,14 @@ Python version 3.6 or greater is required.
    ```
    python app.py
    ```
+
+# How to Open API
+1. เข้าไปที่ลิ้ง
+   ```
+      http://localhost:8080/covid-api/v1/ui/
+   ```
+2. สามารถดูข้อมูล covid ได้โดยใช้ medthod GRTเพิ่ม / ไปข้างหลัง ui/
+   - 
 
 ## Team members
 
