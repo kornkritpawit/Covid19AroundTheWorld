@@ -40,13 +40,12 @@ def get_sum_covid19_situation_world_latest():
         result = [models.Covid19WorldSum(*row) for row in cs.fetchall()]
         return result
 
-def get_new_covid19_situation_world_latest():
+def get_new_covid19_situation_world():
     with db_cursor() as cs:
         cs.execute("""
-            SELECT re.TotalCase, re.TotalDeath, re.TotalRecovered, re.Date
-            FROM (SELECT MAX(cr.TotalRecovered) TotalRecovered, MAX(co.TotalCase) 
-            TotalCase, MAX(co.TotalDeath) TotalDeath, MAX(co.Date) Date 
-            FROM Covid19Recovered cr INNER JOIN Covid19 co ON cr.Location = co.Location) re
+            SELECT Location, NewCase, NewDeath, Date
+            FROM Covid19 
+            WHERE Location = "World"
             """)
         result = [models.Covid19WorldNew(*row) for row in cs.fetchall()]
         return result
