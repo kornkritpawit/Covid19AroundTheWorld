@@ -37,7 +37,7 @@ async function getCovidCase() {
     }];
 
     const layout = {
-        // title: 'Pure alcohol consumption<br>among adults (age 15+) in 2010',
+        title: 'Hover cursor over the map to see all-time infected people by country.',
         geo: {
             projection: {
                 type: 'robinson'
