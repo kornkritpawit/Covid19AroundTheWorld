@@ -4,6 +4,42 @@
 
 Our group will analyze the covid19 situation in the country in Asia. The first source will provide the covid19 cases in each country in Asia including the new covid19 case, the new death case and the recovered cases. The second source will provide the total population. The third source will provide all the information of flights that take place in each country. The last source will provide the currency rate in each country.
 
+## Requirement
+Python version 3.6 or greater is required.
+
+## Installation
+1. Clone or download the project to your machine.
+2. Install Flask framework. Use command line tools.
+
+    For Unix:
+    ```
+    pip3 install Flask
+   ```
+   
+    For Windows:
+    ```
+    pip install Flask
+   ```
+3. Access to project directory. For example,
+    ```
+    YOUR_DIRECTORY/Covid19AroundAsia/ $
+   ```
+4. Generate models by this command.
+    ```
+    java -jar openapi-generator-cli-4.3.1.jar generate -i openapi/covid-api.yaml -o autogen -g python-flask
+   ```
+5. Run local server on your machine by this command.
+   
+   For Unix:
+    ```
+   python3 app.py
+   ```
+   
+   For Windows:
+   ```
+   python app.py
+   ```
+
 ## Team members
 
 | Name | ID |
