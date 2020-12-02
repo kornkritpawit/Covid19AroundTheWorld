@@ -28,6 +28,9 @@
     <meta name="theme-color" content="#478ac9">
     <link rel="canonical" href="index.html">
     <meta property="og:url" content="index.html">
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
   </head>
   <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-6a2c"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="1278" data-image-height="1280">
@@ -46,6 +49,7 @@
             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Home-Page.html" style="padding: 10px 20px;">Home Page</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Graph.html" style="padding: 10px 20px;">Graph</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Map.html" style="padding: 10px 20px;">Map</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Table.html" style="padding: 10px 20px;">Table</a>
 </li></ul>
           </div>
           <div class="u-nav-container-collapse">
@@ -55,6 +59,7 @@
                 <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home-Page.html">Home Page</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Graph.html">Graph</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Map.html">Map</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Table.html">Table</a>
 </li></ul>
               </div>
             </div>
@@ -86,22 +91,16 @@
         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
           <div class="u-gutter-0 u-layout">
             <div class="u-layout-col">
-              <div class="u-size-30">
-                <div class="u-layout-col">
-                  <div class="u-container-style u-layout-cell u-size-60 u-layout-cell-1">
-                    <div class="u-container-layout u-container-layout-1"></div>
-                  </div>
+              <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <div id="myDiv" style="width:600px;height:250px;"></div>
                 </div>
               </div>
-              <div class="u-size-30">
-                <div class="u-layout-row">
-                  <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                    <div class="u-container-layout u-container-layout-2"></div>
-                  </div>
-                  <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-3">
-                    <div class="u-container-layout u-container-layout-3"></div>
-                  </div>
-                </div>
+              <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-2"></div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-3">
+                <div class="u-container-layout u-container-layout-3"></div>
               </div>
             </div>
           </div>
@@ -112,8 +111,7 @@
     
     
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-50e7"><div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-align-center u-small-text u-text u-text-variant u-text-1">MEMBER<br>
-          <br>
+        <p class="u-custom-font u-font-roboto-slab u-text u-text-default u-text-1"><b>DAQ Project: Covid19AroundWorld</b>
         </p>
         <div class="u-border-6 u-border-white u-line u-line-horizontal u-line-1"></div>
       </div></footer>
@@ -128,5 +126,6 @@
         <span>Website Builder Software</span>
       </a>. 
     </section>
+    <script type="text/javascript" src="Graph.js"></script>
   </body>
 </html>
