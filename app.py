@@ -26,8 +26,8 @@ except ModuleNotFoundError:
 
 from openapi_server import encoder
 
-app = connexion.App(__name__,)
+app = connexion.App(__name__, )
 app.app.json_encoder = encoder.JSONEncoder
 app.add_api('openapi/covid-api.yaml')
-app.run(port=8080,debug=True)
+app.run(port=8080, debug=True)
 
