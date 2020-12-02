@@ -31,7 +31,7 @@ def get_country_details(countryId):
 
 def get_sum_covid19_situation_world():
     with db_cursor() as cs:
-        return result
+        return null
 
 def get_new_covid19_situation_world():
     with db_cursor() as cs:
