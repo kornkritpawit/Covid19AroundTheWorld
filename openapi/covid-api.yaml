@@ -401,6 +401,28 @@ components:
         date:
           type: date
 
+    Covid19CountryAll:
+      type: object
+      properties:
+        countryId:
+          type: integer
+        countryName:
+          type: string
+        totalCases:
+          type: integer
+        totalDeathCases:
+          type: integer
+        totalRecoveredCases:
+          type: integer
+        newCases:
+          type: integer
+        newDeath:
+          type: integer
+        newRecovered:
+          type: integer
+        date:
+          type: date
+
     Currency:
       type: object
       properties:
