@@ -423,7 +423,9 @@ components:
         currencyUnit:
           type: string
 
+                  
 
+    
 #   /symbols:
 #     get:
 #       summary: Returns a list of symbols.
