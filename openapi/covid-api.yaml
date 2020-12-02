@@ -46,7 +46,7 @@ paths:
   /covid19Situation/summary/world:
     get:
       summary: Returns covid-19 situation summary of the world in latest date
-      operationId: controller.get_sum_covid19_situation_world
+      operationId: controller.get_sum_covid19_situation_world_latest
       responses:
         200:
           description: Success
@@ -60,7 +60,7 @@ paths:
   /covid19Situation/newCases/world:
     get:
       summary: Returns covid-19 new cases of the world in latest date
-      operationId: controller.get_new_covid19_situation_world
+      operationId: controller.get_new_covid19_situation_world_latest
       responses:
         200:
           description: Success
@@ -74,7 +74,7 @@ paths:
   /covid19Situation/summary/allCountry:
     get:
       summary: Returns a list of covid-19 situation summary of all country in latest date
-      operationId: controller.get_sum_covid19_situation_in_all_country
+      operationId: controller.get_sum_covid19_situation_in_all_country_latest
       responses:
         200:
           description: Success
@@ -99,7 +99,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Covid19CountryNew'
 
-  /covid19Situation/{countryId}:
+  /covid19Situation/newCases/{countryId}:
     parameters:
       - name: countryId
         in: path
@@ -107,8 +107,8 @@ paths:
         schema:
           type : integer
     get:
-      summary: Returns all covid-19 information of a specfic country in latest date
-      operationId: controller.get_covid19_information_in_specific_country
+      summary: Returns a list of covid-19 new cases of specific country
+      operationId: controller.get_new_covid19_situation_in_specific_country
       responses:
         200:
           description: Success
@@ -117,21 +117,7 @@ paths:
               schema:
                 type: array
                 items:
-                 $ref: '#/components/schemas/Covid19CountryAll'
-  
-  /currencyRates:
-    get:
-      summary: Returns a list of currency rates in all country
-      operationId: controller.get_currency_rates
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Currency'
+                  $ref: '#/components/schemas/Covid19CountryNew'
 
   /currencyRates/{countryId}:
     parameters:
@@ -240,30 +226,6 @@ components:
           type: integer
         newDeath:
           type: integer
-        newRecovered:
-          type: integer
-        date:
-          type: date
-
-    Covid19CountryAll:
-      type: object
-      properties:
-        countryId:
-          type: integer
-        countryName:
-          type: string
-        totalCases:
-          type: integer
-        totalDeathCases:
-          type: integer
-        totalRecoveredCases:
-          type: integer
-        newCases:
-          type: integer
-        newDeath:
-          type: integer
-        newRecovered:
-          type: integer
         date:
           type: date
 
@@ -278,12 +240,12 @@ components:
           type: number
         currencyUnit:
           type: string
+        date:
+          type: date
 
     CurrencyUnit:
       type: object
       properties:
-        countryId:
-          type: integer
         countryName:
           type: string
         currencyUnit:
