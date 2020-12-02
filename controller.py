@@ -15,13 +15,13 @@ def get_countries():
         result = [models.Country(*row) for row in cs.fetchall()]
         return result
 
-def get_country_details(countryId):
+def get_country_details(countryName):
     with db_cursor() as cs:
         cs.execute("""
             SELECT CountryID, CountryName, CountryAlpha2, CountryAlpha3
             FROM Country
-            WHERE CountryID=%s
-            """, [countryId])
+            WHERE CountryName=%s
+            """, [countryName])
         result = cs.fetchone()
     if result:
         CountryID, CountryName, CountryAlpha2, CountryAlpha3 = result
@@ -73,37 +73,37 @@ def get_new_covid19_situation_in_all_country():
         result = [models.Covid19CountryNew(*row) for row in cs.fetchall()]
         return result
 
-def get_new_covid19_situation_in_specific_country(countryId):
+def get_new_covid19_situation_in_specific_country(countryName):
     with db_cursor() as cs:
         cs.execute("""
         SELECT CountryID, CountryName, NewCase, NewDeath, Covid19.Date
         FROM Country INNER JOIN Covid19 
         WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
-        AND CountryID=%s
-        """, countryId)
+        AND CountryName=%s
+        """, countryName)
         result = [models.Covid19CountryNew(*row) for row in cs.fetchall()]
         return result
 
-def get_currency_rate_in_specific_country(countryId):
+def get_currency_rate_in_specific_country(countryName):
     with db_cursor() as cs:
         cs.execute("""
         SELECT CountryID, CountryName, CurrencyRate.Rate, CurrencySymbol.Symbol, CurrencyRate.Date 
         FROM Country INNER JOIN CurrencySymbol INNER JOIN CurrencyRate 
         WHERE CurrencySymbol.Symbol = CurrencyRate.SymbolAlpha
-        AND Country.CountryAlpha2 = CurrencySymbol.CountryAlpha2 AND CountryID=%s
-        """, countryId)
+        AND Country.CountryAlpha2 = CurrencySymbol.CountryAlpha2 AND CountryName=%s
+        """, countryName)
         result = [models.Currency(*row) for row in cs.fetchall()]
         return result
 
-def get_currency_unit_in_specific_country(countryId):
+def get_currency_unit_in_specific_country(countryName):
     with db_cursor() as cs:
         cs.execute("""
         SELECT CountryName, Symbol FROM
         (SELECT CountryID, CountryName, CurrencyRate.Rate, CurrencySymbol.Symbol as Symbol, CurrencyRate.Date 
         FROM Country INNER JOIN CurrencySymbol INNER JOIN CurrencyRate 
         WHERE CurrencySymbol.Symbol = CurrencyRate.SymbolAlpha
-        AND Country.CountryAlpha2 = CurrencySymbol.CountryAlpha2 AND CountryID=%s) c
+        AND Country.CountryAlpha2 = CurrencySymbol.CountryAlpha2 AND CountryName=%s) c
         GROUP BY CountryName, Symbol
-        """, countryId)
+        """, countryName)
         result = [models.CurrencyUnit(*row) for row in cs.fetchall()]
         return result
