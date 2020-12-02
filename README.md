@@ -51,12 +51,20 @@ Python version 3.6 or greater is required.
    Default port is 8080. You can change to your port that you open python local server.
 
 # How to Open API
-1. เข้าไปที่ลิ้ง
+1. Start the REST API server and Optionally test the API at
    ```
       http://localhost:8080/covid-api/v1/ui/
    ```
-2. สามารถดูข้อมูล covid ได้โดยใช้ medthod GRTเพิ่ม / ไปข้างหลัง ui/
-   - 
+2. We can see information about covid-19 API by seeing the documentation. All method provide by GET request.
+   - /countries
+   - /countries/{countryName}
+   - /covid19Situation/newCases/allCountry
+   - /covid19Situation/newCases/world
+   - /covid19Situation/newCases/{countryName}
+   - /covid19Situation/summary/allCountry
+   - /covid19Situation/summary/world
+   - /currencyRates/unit/{countryName}
+   - /currencyRates/{countryName}
 
 ## Team members
 
