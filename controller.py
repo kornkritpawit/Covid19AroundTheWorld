@@ -53,7 +53,16 @@ def get_new_covid19_situation_world_latest():
 
 def get_sum_covid19_situation_in_all_country_latest():
     with db_cursor() as cs:
-        return "Hoy"
+        cs.execute("""
+        SELECT CountryID,CountryName,MAX(TotalCase) as TotalCase , MAX(TotalDeath) as TotalDeath, MAX(TotalRecovered) as TotalRecovered,MAX(Date) as Date FROM
+        (SELECT CountryID as CountryID, CountryName, TotalCase, TotalDeath, Covid19Recovered.TotalRecovered as TotalRecovered , Covid19.Date as Date
+        FROM Country INNER JOIN Covid19 INNER JOIN Covid19Recovered 
+        WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
+        AND Country.CountryAlpha2 = Covid19Recovered.CountryAlpha2) c
+        GROUP BY CountryID,CountryName
+        """)
+        result = [models.Covid19CountrySum(*row) for row in cs.fetchall()]
+        return result
 
 def get_new_covid19_situation_in_all_country():
     with db_cursor() as cs:
@@ -97,5 +106,5 @@ def get_currency_unit_in_specific_country(countryId):
         AND Country.CountryAlpha2 = CurrencySymbol.CountryAlpha2 AND CountryID=%s) c
         GROUP BY CountryName, Symbol
         """, countryId)
-        result = [models.Currency(*row) for row in cs.fetchall()]
+        result = [models.CurrencyUnit(*row) for row in cs.fetchall()]
         return result
