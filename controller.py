@@ -40,6 +40,15 @@ def get_new_covid19_situation_world():
 
 def get_sum_covid19_situation_in_all_country():
     with db_cursor() as cs:
+        cs.execute("""
+        SELECT CountryID,CountryName,MAX(TotalCase) as TotalCase , MAX(TotalDeath) as TotalDeath, MAX(TotalRecovered) as TotalRecovered,MAX(Date) as Date FROM
+        (SELECT CountryID as CountryID, CountryName, TotalCase, TotalDeath, Covid19Recovered.TotalRecovered as TotalRecovered , Covid19.Date as Date
+        FROM Country INNER JOIN Covid19 INNER JOIN Covid19Recovered 
+        WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
+        AND Country.CountryAlpha2 = Covid19Recovered.CountryAlpha2) c
+        GROUP BY CountryID,CountryName
+        """)
+        result = [models.Covid19CountrySum(*row) for row in cs.fetchall()]
         return result
 
 def get_new_covid19_situation_in_all_country():

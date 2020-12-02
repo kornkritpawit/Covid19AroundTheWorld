@@ -313,9 +313,9 @@ components:
           type: string
         totalCases:
           type: integer
-        deathCases:
+        totalDeathCases:
           type: integer
-        recoveredCases:
+        totalRecoveredCases:
           type: integer
         date:
           type: date
