@@ -2,11 +2,11 @@
 
 ![Asia](https://icon-library.com/images/asia-icon/asia-icon-4.jpg)
 
-Our group will analyze the covid19 situation in the country around the world. 
-- The first source will provide the covid-19 cases in each country around the world including the new covid-19 case, the new death case and the recovered cases. 
-- The second source will provide the total population. 
-- The third source will provide all the information of flights that take place in each country. 
-- The last source will provide the currency rate in each country and compare covid-19 situation with the currency rate.
+Our group will analyze the covid-19 situation around  the world. 
+- The first source will provide the covid-19 cases in each around  the world including the total covid-19 case, the total death case ,new case ,new death
+- The second source will provide the recovered cases. 
+- The third source will provide the country  around  the world. 
+- The last source will provide the currency rate in each country.
 
 ## Requirement
 Python version 3.6 or greater is required.
@@ -41,7 +41,7 @@ Python version 3.6 or greater is required.
    
    For Windows:
    ```
-   python app.py
+   py app.py
    ```
    The server will running on default configuration on http://localhost:8080/.
 6. Open second window command line. Open GraphQL accessible by this command.
@@ -50,7 +50,7 @@ Python version 3.6 or greater is required.
    ```
    Default port is 8080. You can change to your port that you open python local server.
 
-# How to Open API
+## How to Open API 
 1. Start the REST API server and Optionally test the API at
    ```
       http://localhost:8080/covid-api/v1/ui/
@@ -65,6 +65,15 @@ Python version 3.6 or greater is required.
    - /covid19Situation/summary/world
    - /currencyRates/unit/{countryName}
    - /currencyRates/{countryName}
+
+## Open Covid-19 Web App
+1. After do the installation, access to this directory.
+    ```
+   YOUR_DIRECTORY/Covid19AroundAsia/html
+   ```  
+2. Open `Home-Page.html` in any choice of your browser.
+3. Enjoy using web-app
+* You need to open 
 
 ## Team members
 
