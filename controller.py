@@ -79,7 +79,8 @@ def get_new_covid19_situation_in_specific_country(countryName):
         SELECT CountryID, CountryName, NewCase, NewDeath, Covid19.Date
         FROM Country INNER JOIN Covid19 
         WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
-        AND CountryName=%s
+        AND CountryName=%s  
+        ORDER BY `Covid19`.`Date`  ASC
         """, countryName)
         print(countryName)
         result = [models.Covid19CountryNew(*row) for row in cs.fetchall()]
