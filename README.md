@@ -2,11 +2,11 @@
 
 ![Asia](https://icon-library.com/images/asia-icon/asia-icon-4.jpg)
 
-Our group will analyze the covid19 situation in the country around the world. 
-- The first source will provide the covid-19 cases in each country around the world including the new covid-19 case, the new death case and the recovered cases. 
-- The second source will provide the total population. 
-- The third source will provide all the information of flights that take place in each country. 
-- The last source will provide the currency rate in each country and compare covid-19 situation with the currency rate.
+Our group will analyze the covid-19 situation around  the world. 
+- The first source will provide the covid-19 cases in each around  the world including the total covid-19 case, the total death case ,new case ,new death
+- The second source will provide the recovered cases. 
+- The third source will provide the country  around  the world. 
+- The last source will provide the currency rate in each country.
 
 ## Requirement
 Python version 3.6 or greater is required.
