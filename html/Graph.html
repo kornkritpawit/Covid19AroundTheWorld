@@ -135,11 +135,13 @@
         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
             <div class="u-gutter-0 u-layout">
                 <div class="u-layout-col">
-                    <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-1">
+                    <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-1" >
                         <div class="u-container-layout u-container-layout-1">
-                            <div id="myDiv" style="width:600px;height:250px;"></div>
-                            <div id="myDiv2" style="width:600px;height:250px;"></div>
-                            <div id="myDiv3" style="width:600px;height:250px;"></div>
+                            <div id="myDiv" style="width:100%;height:75vh;"></div>
+                            <div style="height:10vh;"></div>
+                            <div id="myDiv2" style="width:100%;height:75vh;"></div>
+                            <div style="height:10vh;"></div>
+                            <div id="myDiv3" style="width:100%;height:75vh;"></div>
                         </div>
                     </div>
                 </div>
@@ -231,8 +233,12 @@
 
         var layout2 = {
             title: 'New Covid-19 Cases in ' + input,
+            "titlefont": {
+            "size": 36
+            },
             xaxis: {
                 title: 'Date'
+
             },
             yaxis: {
                 title: 'New Cases',
@@ -242,6 +248,9 @@
         };
         var layout = {
             title: 'New Covid-19 Deaths in ' + input,
+            "titlefont": {
+            "size": 36
+            },
             xaxis: {
                 title: 'Date'
             },
@@ -291,6 +300,9 @@
 
         })
         var layout = {
+          "titlefont": {
+            "size": 36
+            },
             title: 'Currency Rates in ' + input,
             xaxis: {
                 title: 'Date'
