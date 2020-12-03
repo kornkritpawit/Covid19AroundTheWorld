@@ -33,7 +33,12 @@ async function getCovidCase() {
         locations: unpack(country, 'countryName'),
         z: unpack(country, 'totalCases'),
         text: unpack(country, 'countryName'),
-        autocolorscale: true
+        colorscale: [
+            [0,'rgb(5, 10, 172)'],[0.3,'rgb(40, 60, 190)'],
+            [0.5,'rgb(70, 100, 245)'], [0.7,'rgb(90, 120, 245)'],
+            [0.9,'rgb(106, 137, 247)'],[1,'rgb(155,165,202)']],
+        autocolorscale: false,
+        reversescale: true
     }];
 
     const layout = {
