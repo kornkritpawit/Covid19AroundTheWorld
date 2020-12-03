@@ -131,7 +131,7 @@ def get_currency_and_new_case_analysis_when_decreasing():
         FROM Country co INNER JOIN CurrencySymbol cs ON co.CountryAlpha2 = cs.CountryAlpha2 
         INNER JOIN CurrencyRate cr on cr.SymbolAlpha = cs.Symbol 
         INNER JOIN Covid19 ON co.CountryAlpha3 = Covid19.CountryAlpha3 AND Covid19.Date = cr.Date) n
-        WHERE n.Date1 = "2020-06-01"
+        WHERE n.Date1 = "2020-07-01"
         GROUP BY n.CountryName, n.CurrencyRate, n.NewCase
         """)
         result = [models.Covid19CompareCurrency(*row) for row in cs.fetchall()]

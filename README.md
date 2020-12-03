@@ -2,7 +2,11 @@
 
 ![Asia](https://icon-library.com/images/asia-icon/asia-icon-4.jpg)
 
-Our group will analyze the covid19 situation in the country in Asia. The first source will provide the covid19 cases in each country in Asia including the new covid19 case, the new death case and the recovered cases. The second source will provide the total population. The third source will provide all the information of flights that take place in each country. The last source will provide the currency rate in each country.
+Our group will analyze the covid19 situation in the country around the world. 
+- The first source will provide the covid-19 cases in each country around the world including the new covid-19 case, the new death case and the recovered cases. 
+- The second source will provide the total population. 
+- The third source will provide all the information of flights that take place in each country. 
+- The last source will provide the currency rate in each country and compare covid-19 situation with the currency rate.
 
 ## Requirement
 Python version 3.6 or greater is required.
@@ -45,6 +49,22 @@ Python version 3.6 or greater is required.
    openapi-to-graphql --cors -u http://localhost:8080/covid-api/v1/ openapi/covid-api.yaml
    ```
    Default port is 8080. You can change to your port that you open python local server.
+
+# How to Open API
+1. Start the REST API server and Optionally test the API at
+   ```
+      http://localhost:8080/covid-api/v1/ui/
+   ```
+2. We can see information about covid-19 API by seeing the documentation. All method provide by GET request.
+   - /countries
+   - /countries/{countryName}
+   - /covid19Situation/newCases/allCountry
+   - /covid19Situation/newCases/world
+   - /covid19Situation/newCases/{countryName}
+   - /covid19Situation/summary/allCountry
+   - /covid19Situation/summary/world
+   - /currencyRates/unit/{countryName}
+   - /currencyRates/{countryName}
 
 ## Team members
 

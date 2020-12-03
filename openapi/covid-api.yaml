@@ -179,33 +179,33 @@ paths:
                 items:
                   $ref: '#/components/schemas/Covid19Continent'
 
-  # /covid19Situation/newCase/currency/peaking:
-  #   get:
-  #     summary: Returns a list of covid-19 new cases compare with conrrency when Covid19 is peaking
-  #     operationId: controller.get_currency_and_new_case_analysis_when_peaking
-  #     responses:
-  #       200:
-  #         description: Success
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/Covid19CompareCurrency'
+  /covid19Situation/newCase/currency/peaking:
+    get:
+      summary: Returns a list of covid-19 new cases compare with conrrency when Covid19 is peaking
+      operationId: controller.get_currency_and_new_case_analysis_when_peaking
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Covid19CompareCurrency'
 
-  # /covid19Situation/newCase/currency/decreasing:
-  #   get:
-  #     summary: Returns a list of covid-19 new cases compare with conrrency when Covid19 is decreasing
-  #     operationId: controller.get_currency_and_new_case_analysis_when_decreasing
-  #     responses:
-  #       200:
-  #         description: Success
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/Covid19CompareCurrency'
+  /covid19Situation/newCase/currency/decreasing:
+    get:
+      summary: Returns a list of covid-19 new cases compare with conrrency when Covid19 is decreasing
+      operationId: controller.get_currency_and_new_case_analysis_when_decreasing
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Covid19CompareCurrency'
 
 components:
   schemas:
@@ -297,20 +297,6 @@ components:
         countryName:
           type: string
         currencyUnit:
-          type: string
-
-    Covid19Continent:
-      type: object 
-      properties:
-        countryId:
-          type: integer 
-        continent:
-          type: string
-        countryName:
-          type: string
-        newCase:
-          type: integer
-        date:
           type: string
 
     Covid19Continent:
