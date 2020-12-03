@@ -131,7 +131,7 @@
             </form>
 
         </div>
-        <h2 class="u-custom-font u-font-roboto-slab u-text u-text-2">Thailand</h2>
+        <h2 class="u-custom-font u-font-roboto-slab u-text u-text-2"></h2>
         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
             <div class="u-gutter-0 u-layout">
                 <div class="u-layout-col">
@@ -175,21 +175,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
 <script>
-    var dataNewCurrencies = [{
-        x: [],
-        y: [],
-        type: 'line'
-    }]
-    var dataNewDeaths = [{
-        x: [],
-        y: [],
-        type: 'line'
-    }]
-    var dataNewCases = [{
-        x: [],
-        y: [],
-        type: 'line'
-    }]
     $(document).ready(function () {
         $('form').submit(function (e) {
             e.preventDefault();
@@ -201,6 +186,16 @@
     });
 
     async function createNewCasesChart(input) {
+      var dataNewDeaths = [{
+        x: [],
+        y: [],
+        type: 'line'
+    }]
+    var dataNewCases = [{
+        x: [],
+        y: [],
+        type: 'line'
+    }]
         var resp = await fetch('http://localhost:3000/graphql', {
             method: 'POST',
             headers: {
@@ -263,6 +258,11 @@
     }
 
     async function createCurrencyChart(input) {
+      var dataNewCurrencies = [{
+        x: [],
+        y: [],
+        type: 'line'
+    }]
         var resp = await fetch('http://localhost:3000/graphql', {
             method: 'POST',
             headers: {
