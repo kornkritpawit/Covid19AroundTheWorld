@@ -41,7 +41,7 @@ Python version 3.6 or greater is required.
    
    For Windows:
    ```
-   python app.py
+   py app.py
    ```
    The server will running on default configuration on http://localhost:8080/.
 6. Open second window command line. Open GraphQL accessible by this command.
@@ -50,7 +50,7 @@ Python version 3.6 or greater is required.
    ```
    Default port is 8080. You can change to your port that you open python local server.
 
-## How to Open API
+## How to Open API 
 1. Start the REST API server and Optionally test the API at
    ```
       http://localhost:8080/covid-api/v1/ui/
@@ -66,8 +66,14 @@ Python version 3.6 or greater is required.
    - /currencyRates/unit/{countryName}
    - /currencyRates/{countryName}
 
-## Open Covid-19 Application
-1. After do the installation, you can access app webpage by open html file  
+## Open Covid-19 Web App
+1. After do the installation, access to this directory.
+    ```
+   YOUR_DIRECTORY/Covid19AroundAsia/html
+   ```  
+2. Open `Home-Page.html` in any choice of your browser.
+3. Enjoy using web-app
+* You need to open 
 
 ## Team members
 
