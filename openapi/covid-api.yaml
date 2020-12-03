@@ -159,16 +159,16 @@ paths:
                 items:
                   $ref: '#/components/schemas/CurrencyUnit'
 
-  /covid19Situation/newCases/{continent}:
+  /covid19Situation/newCases/continent/{cont}:
     parameters:
-      - name: continent
+      - name: cont
         in: path
         required: true
         schema:
           type : string
     get:
-      summary: Returns a list of covid-19 new cases of specific country
-      operationId: controller.get_new_covid19_situation_by_continent
+      summary: Returns a list of covid-19 new cases of specific continent
+      operationId: controller.get_latest_covid19_by_continent
       responses:
         200:
           description: Success
@@ -178,6 +178,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Covid19Continent'
+
+  # /covid19Situation/newCase/currency/peaking:
+  #   get:
+  #     summary: Returns a list of covid-19 new cases compare with conrrency when Covid19 is peaking
+  #     operationId: controller.get_currency_and_new_case_analysis_when_peaking
+  #     responses:
+  #       200:
+  #         description: Success
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/Covid19CompareCurrency'
+
+  # /covid19Situation/newCase/currency/decreasing:
+  #   get:
+  #     summary: Returns a list of covid-19 new cases compare with conrrency when Covid19 is decreasing
+  #     operationId: controller.get_currency_and_new_case_analysis_when_decreasing
+  #     responses:
+  #       200:
+  #         description: Success
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: '#/components/schemas/Covid19CompareCurrency'
 
 components:
   schemas:
@@ -249,18 +277,6 @@ components:
         date:
           type: string
 
-    Covid19Continent:
-      type: object
-      properties:
-        continent:
-          type: string
-        location:
-          type: string
-        newCases:
-          type: integer
-        date:
-          type: string
-
     Currency:
       type: object
       properties:
@@ -281,4 +297,42 @@ components:
         countryName:
           type: string
         currencyUnit:
+          type: string
+
+    Covid19Continent:
+      type: object 
+      properties:
+        countryId:
+          type: integer 
+        continent:
+          type: string
+        countryName:
+          type: string
+        newCase:
+          type: integer
+        date:
+          type: string
+
+    Covid19Continent:
+      type: object 
+      properties:
+        countryId:
+          type: integer 
+        continent:
+          type: string
+        countryName:
+          type: string
+        newCase:
+          type: integer
+        date:
+          type: string
+  
+    Covid19CompareCurrency:
+      type: object
+      properties:
+        countryName:
+          type: string
+        currencyRate:
+          type: integer
+        newCase:
           type: string

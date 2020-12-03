@@ -81,6 +81,7 @@ def get_new_covid19_situation_in_specific_country(countryName):
         WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
         AND CountryName=%s
         """, countryName)
+        print(countryName)
         result = [models.Covid19CountryNew(*row) for row in cs.fetchall()]
         return result
 
@@ -108,35 +109,40 @@ def get_currency_unit_in_specific_country(countryName):
         result = [models.CurrencyUnit(*row) for row in cs.fetchall()]
         return result
 
-def get_currency_new_case_analysis():
+def get_currency_and_new_case_analysis_when_peaking():
     with db_cursor() as cs:
         cs.execute("""
+        SELECT n.CountryName, n.CurrencyRate, n.NewCase
+        FROM (SELECT co.CountryName CountryName, cr.Rate CurrencyRate, Covid19.Date Date1, Covid19.NewCase NewCase
+        FROM Country co INNER JOIN CurrencySymbol cs ON co.CountryAlpha2 = cs.CountryAlpha2 
+        INNER JOIN CurrencyRate cr on cr.SymbolAlpha = cs.Symbol 
+        INNER JOIN Covid19 ON co.CountryAlpha3 = Covid19.CountryAlpha3 AND Covid19.Date = cr.Date) n
+        WHERE n.Date1 = "2020-06-01"
+        GROUP BY n.CountryName, n.CurrencyRate, n.NewCase
         """)
-        result = [models.CurrencyUnit(*row) for row in cs.fetchall()]
+        result = [models.Covid19CompareCurrency(*row) for row in cs.fetchall()]
         return result
 
-def get_new_covid19_situation_by_continent(continent):
+def get_currency_and_new_case_analysis_when_decreasing():
     with db_cursor() as cs:
         cs.execute("""
-        SELECT Continent, Location, NewCase, Date
-        FROM Covid19
-        WHERE Continent=%s
-        """, continent)
+        SELECT n.CountryName, n.CurrencyRate, n.NewCase
+        FROM (SELECT co.CountryName CountryName, cr.Rate CurrencyRate, Covid19.Date Date1, Covid19.NewCase NewCase
+        FROM Country co INNER JOIN CurrencySymbol cs ON co.CountryAlpha2 = cs.CountryAlpha2 
+        INNER JOIN CurrencyRate cr on cr.SymbolAlpha = cs.Symbol 
+        INNER JOIN Covid19 ON co.CountryAlpha3 = Covid19.CountryAlpha3 AND Covid19.Date = cr.Date) n
+        WHERE n.Date1 = "2020-06-01"
+        GROUP BY n.CountryName, n.CurrencyRate, n.NewCase
+        """)
+        result = [models.Covid19CompareCurrency(*row) for row in cs.fetchall()]
+        return result
+
+def get_latest_covid19_by_continent(cont):
+    with db_cursor() as cs:
+        cs.execute("""
+        SELECT CountryID, Continent, Country.CountryName, NewCase, Covid19.Date
+        FROM Covid19 INNER JOIN Country 
+        WHERE Country.CountryAlpha3 = Covid19.CountryAlpha3 AND Continent=%s  
+        """, cont)
         result = [models.Covid19Continent(*row) for row in cs.fetchall()]
         return result
-
-# SELECT n.CountryName, n.CurrencyRate, n.Date, n.NewCase
-# FROM (SELECT co.CountryName CountryName, cr.Rate CurrencyRate, cr.Date Date, Covid19.NewCase NewCase
-# FROM Country co INNER JOIN CurrencySymbol cs ON co.CountryAlpha2 = cs.CountryAlpha2 
-# INNER JOIN CurrencyRate cr on cr.SymbolAlpha = cs.Symbol 
-# INNER JOIN Covid19 ON co.CountryAlpha3 = Covid19.CountryAlpha3) n
-# WHERE n.Date = "2020-02-01"
-# GROUP BY n.CountryName, n.CurrencyRate, n.Date, n.NewCase
-
-# SELECT n.CountryName, n.CurrencyRate, n.Date, n.NewCase
-# FROM (SELECT co.CountryName CountryName, cr.Rate CurrencyRate, Covid19.Date Date, Covid19.NewCase NewCase
-# FROM Country co INNER JOIN CurrencySymbol cs ON co.CountryAlpha2 = cs.CountryAlpha2 
-# INNER JOIN CurrencyRate cr on cr.SymbolAlpha = cs.Symbol 
-# INNER JOIN Covid19 ON co.CountryAlpha3 = Covid19.CountryAlpha3) n
-# WHERE n.Date = "2020-05-02"
-# GROUP BY n.CountryName, n.CurrencyRate, n.Date, n.NewCase
