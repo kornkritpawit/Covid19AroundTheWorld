@@ -169,22 +169,8 @@
   <script type="text/javascript" src="Graph.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   
-  <script>
-  var dataNewCurrencies =[{
-        x: [],
-        y: [],
-        type: 'line'
-    }]
-  var dataNewDeaths =[{
-        x: [],
-        y: [],
-        type: 'line'
-    }]
-  var dataNewCases =[{
-        x: [],
-        y: [],
-        type: 'line'
-    }]
+<script>
+
 $(document).ready(function () {
       $('form').submit(function (e) {
         e.preventDefault();
@@ -194,8 +180,17 @@ $(document).ready(function () {
         createCurrencyChart(cnameCap);
     })
 });
-
 async function createNewCasesChart(input) {
+  var dataNewCases =[{
+        x: [],
+        y: [],
+        type: 'line'
+    }]
+  var dataNewDeaths =[{
+        x: [],
+        y: [],
+        type: 'line'
+    }]
     var resp = await fetch('http://localhost:3000/graphql', {
     method: 'POST',
     headers: {
@@ -257,6 +252,11 @@ async function createNewCasesChart(input) {
 
 }
 async function createCurrencyChart(input) {
+    var dataNewCurrencies =[{
+        x: [],
+        y: [],
+        type: 'line'
+    }]
     var resp = await fetch('http://localhost:3000/graphql', {
     method: 'POST',
     headers: {
@@ -298,10 +298,8 @@ async function createCurrencyChart(input) {
 
     Plotly.newPlot('myDiv3', dataNewCurrencies, layout, config);
 }      
-    
-       
 
-  </script>
+</script>
 
 </body>
 

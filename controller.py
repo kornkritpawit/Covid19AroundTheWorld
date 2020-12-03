@@ -53,12 +53,13 @@ def get_new_covid19_situation_world():
 def get_sum_covid19_situation_in_all_country_latest():
     with db_cursor() as cs:
         cs.execute("""
-        SELECT CountryID,CountryName,MAX(TotalCase) as TotalCase , MAX(TotalDeath) as TotalDeath, MAX(TotalRecovered) as TotalRecovered,MAX(Date) as Date FROM
-        (SELECT CountryID as CountryID, CountryName, TotalCase, TotalDeath, Covid19Recovered.TotalRecovered as TotalRecovered , Covid19.Date as Date
+        SELECT CountryID,CountryName,MAX(TotalCase) as TotalCase , MAX(TotalDeath) as TotalDeath, MAX(TotalRecovered) as TotalRecovered, MAX(Population) as TotalPopulation ,MAX(Date) as Date FROM
+        (SELECT CountryID as CountryID, CountryName, TotalCase, TotalDeath, Covid19Recovered.TotalRecovered as TotalRecovered ,Covid19.Population as Population, Covid19.Date as Date
         FROM Country INNER JOIN Covid19 INNER JOIN Covid19Recovered 
         WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
         AND Country.CountryAlpha2 = Covid19Recovered.CountryAlpha2) c
-        GROUP BY CountryID,CountryName
+        GROUP BY CountryID,CountryName  
+        ORDER BY `c`.`CountryName`  ASC
         """)
         result = [models.Covid19CountrySum(*row) for row in cs.fetchall()]
         return result
@@ -146,4 +147,14 @@ def get_latest_covid19_by_continent(cont):
         WHERE Country.CountryAlpha3 = Covid19.CountryAlpha3 AND Continent=%s  
         """, cont)
         result = [models.Covid19Continent(*row) for row in cs.fetchall()]
+        return result
+
+def get_countries_population():
+    with db_cursor() as cs:
+        cs.execute("""
+        SELECT Country.CountryID,Population,Location, MAX(Covid19.Date) as Date FROM Covid19 INNER JOIN Country WHERE Country.CountryAlpha3 = Covid19.CountryAlpha3  
+        GROUP BY Country.CountryID,Population,Location  
+        ORDER BY `Country`.`CountryID` ASC
+        """)
+        result = [models.Population(*row) for row in cs.fetchall()]
         return result
