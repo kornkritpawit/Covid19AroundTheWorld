@@ -10,6 +10,7 @@ Our group will analyze the covid-19 situation around  the world.
 
 ## Requirement
 Python version 3.6 or greater is required.
+Node.js
 
 ## Installation
 1. Clone or download the project to your machine.
@@ -24,6 +25,10 @@ Python version 3.6 or greater is required.
     ```
     pip install Flask
    ```
+3. Install openapi-to-graphql. Using this command.
+    ```
+    npm i openapi-to-graphql
+    ```
 3. Access to project directory. For example,
     ```
     YOUR_DIRECTORY/Covid19AroundAsia/ $
