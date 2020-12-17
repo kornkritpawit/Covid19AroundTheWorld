@@ -1,6 +1,6 @@
 # Covid-19 Around The World
 
-![Asia](https://icon-library.com/images/asia-icon/asia-icon-4.jpg)
+![Asia](https://www.phocuswire.com/uploadedImages/Articles/Opinion/2020/May/womens-leadership-coronavirus.jpg?origwidth=800&origheight=400&origmode=crop&Anchor=MiddleCenter&width=800&height=400&scale=both&mode=crop)
 
 Our group will analyze the covid-19 situation around  the world. 
 - The first source will provide the covid-19 cases in each around  the world including the total covid-19 case, the total death case ,new case ,new death
@@ -10,6 +10,7 @@ Our group will analyze the covid-19 situation around  the world.
 
 ## Requirement
 Python version 3.6 or greater is required.
+Node.js
 
 ## Installation
 1. Clone or download the project to your machine.
@@ -24,6 +25,10 @@ Python version 3.6 or greater is required.
     ```
     pip install Flask
    ```
+3. Install openapi-to-graphql. Using this command.
+    ```
+    npm i openapi-to-graphql
+    ```
 3. Access to project directory. For example,
     ```
     YOUR_DIRECTORY/Covid19AroundAsia/ $
