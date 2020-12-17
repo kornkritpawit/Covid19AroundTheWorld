@@ -32,7 +32,11 @@ Python version 3.6 or greater is required.
     ```
     java -jar openapi-generator-cli-4.3.1.jar generate -i openapi/covid-api.yaml -o autogen -g python-flask
    ```
-5. Run local server on your machine by this command.
+5. Install all requirements.
+   ```
+   pip install -r requirements.txt
+   ```
+6. Run a local server on your machine by this command.
    
    For Unix:
     ```
@@ -43,8 +47,8 @@ Python version 3.6 or greater is required.
    ```
    py app.py
    ```
-   The server will running on default configuration on http://localhost:8080/.
-6. Open second window command line. Open GraphQL accessible by this command.
+   The server will run on default configuration on http://localhost:8080/.
+7. Open second window command line. Open GraphQL accessible by this command.
     ```
    openapi-to-graphql --cors -u http://localhost:8080/covid-api/v1/ openapi/covid-api.yaml
    ```
