@@ -30,6 +30,10 @@ Our group will analyze the covid-19 situation around  the world.
     ```
     npm i openapi-to-graphql
     ```
+   Then install for command line interface.
+   ```
+   npm i -g openapi-to-graphql-cli
+   ```
 3. Access to project directory. For example,
     ```
     YOUR_DIRECTORY/Covid19AroundAsia/ $
