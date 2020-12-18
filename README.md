@@ -9,8 +9,9 @@ Our group will analyze the covid-19 situation around  the world.
 - The last source will provide the currency rate in each country.
 
 ## Requirement
-Python version 3.6 or greater is required.
-Node.js
+- Python version 3.6 or greater is required.
+- Node.js
+- Java
 
 ## Installation
 1. Clone or download the project to your machine.
