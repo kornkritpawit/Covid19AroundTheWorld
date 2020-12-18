@@ -87,7 +87,6 @@ Our group will analyze the covid-19 situation around  the world.
    ```  
 2. Open `Home-Page.html` in any choice of your browser.
 3. Enjoy using web-app
-* You need to open 
 
 ## Team members
 
