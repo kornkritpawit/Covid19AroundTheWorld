@@ -4,10 +4,17 @@ function unpack(rows, key) {
     });
 }
 
-function unpackTotalCases(rows, key1, key2, key3) {
-    return rows.map(function (row) {
-        return "Total Cases: " + row[key1] + "<br>" + "Total Death: " + row[key2] + "<br>" + "Total Recovered: " + row[key3];
-    });
+function unpackTotalCases(rows, rows2) {
+    const array = [];
+    for (let i = 0; i < rows.length; i++) {
+        array.push("Total Cases: " + rows[i].totalCases + "<br>"
+            + "Total Death: " + rows[i].totalDeathCases + "<br>"
+            + "Total Recovered: " + rows[i].totalRecoveredCases + "<br>"
+            + "Today New Cases: " + rows2[i].newCases + "<br>"
+            + "Today Death: " + rows2[i].newDeath
+        );
+    }
+    return array;
 }
 
 
@@ -31,16 +38,36 @@ async function getCovidCase() {
             `
         })
     });
-    // console.log(resp)
+
+    const resp2 = await fetch('http://localhost:3000/graphql', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            query: `
+                {
+                  covid19SituationNewCasesAllCountry {
+                    countryName
+                    newCases
+                    newDeath
+                  }
+                }
+            `
+        })
+    });
     const json = await resp.json();
-    // console.log(json)
+    const json2 = await resp2.json();
     let country = json.data.covid19SituationSummaryAllCountry;
+    let country2 = json2.data.covid19SituationNewCasesAllCountry;
+
     const data = [{
         type: 'choropleth',
         locationmode: 'country names',
         locations: unpack(country, 'countryName'),
         z: unpack(country, 'totalCases'),
-        text: unpackTotalCases(country, 'totalCases', 'totalDeathCases', 'totalRecoveredCases'),
+        text: unpackTotalCases(country, country2),
 
         colorscale: [
             [0,'rgb(5, 10, 172)'],[0.3,'rgb(40, 60, 190)'],
