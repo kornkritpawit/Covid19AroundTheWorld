@@ -2,10 +2,12 @@
 
 ![Asia](https://www.phocuswire.com/uploadedImages/Articles/Opinion/2020/May/womens-leadership-coronavirus.jpg?origwidth=800&origheight=400&origmode=crop&Anchor=MiddleCenter&width=800&height=400&scale=both&mode=crop)
 
-Our group will analyze the covid-19 situation around  the world. 
-- The first source will provide the covid-19 cases in each around  the world including the total covid-19 case, the total death case ,new case ,new death
-- The second source will provide the recovered cases. 
-- The third source will provide the country  around  the world. 
+Our group will analyze the covid-19 situation around the world including the total Covid-19 cases, new cases, death cases and recovered cases and the impact of Covid-19 to the economic situation by comparing the currency rate with the new Covid-19 cases that occurred in each countries from the time Covid-19 start until now.
+
+## Datasource
+- The first source will provide the covid-19 cases around  the world including the total covid-19 cases, new cases, death cases.
+- The second source will provide the recovered cases.
+- The third source will provide the country detail around the world. 
 - The last source will provide the currency rate in each country.
 
 ## Requirement
@@ -67,7 +69,7 @@ Our group will analyze the covid-19 situation around  the world.
 ## How to Open API 
 1. Start the REST API server and Optionally test the API at
    ```
-      http://localhost:8080/covid-api/v1/ui/
+   http://localhost:8080/covid-api/v1/ui/
    ```
 2. We can see information about covid-19 API by seeing the documentation. All method provide by GET request.
    - /countries
