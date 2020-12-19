@@ -59,7 +59,7 @@ def get_sum_covid19_situation_in_all_country_latest():
         WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
         AND Country.CountryAlpha2 = Covid19Recovered.CountryAlpha2) c
         GROUP BY CountryID,CountryName  
-        ORDER BY `c`.`CountryName`  ASC
+        ORDER BY CountryID
         """)
         result = [models.Covid19CountrySum(*row) for row in cs.fetchall()]
         return result
