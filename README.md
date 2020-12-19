@@ -1,6 +1,6 @@
 # Covid-19 Around The World
 
-![Asia](https://icon-library.com/images/asia-icon/asia-icon-4.jpg)
+![Asia](https://www.phocuswire.com/uploadedImages/Articles/Opinion/2020/May/womens-leadership-coronavirus.jpg?origwidth=800&origheight=400&origmode=crop&Anchor=MiddleCenter&width=800&height=400&scale=both&mode=crop)
 
 Our group will analyze the covid-19 situation around  the world. 
 - The first source will provide the covid-19 cases in each around  the world including the total covid-19 case, the total death case ,new case ,new death
@@ -9,7 +9,9 @@ Our group will analyze the covid-19 situation around  the world.
 - The last source will provide the currency rate in each country.
 
 ## Requirement
-Python version 3.6 or greater is required.
+- Python version 3.6 or greater is required.
+- Node.js
+- Java
 
 ## Installation
 1. Clone or download the project to your machine.
@@ -24,6 +26,14 @@ Python version 3.6 or greater is required.
     ```
     pip install Flask
    ```
+3. Install openapi-to-graphql. Using this command.
+    ```
+    npm i openapi-to-graphql
+    ```
+   Then install for command line interface.
+   ```
+   npm i -g openapi-to-graphql-cli
+   ```
 3. Access to project directory. For example,
     ```
     YOUR_DIRECTORY/Covid19AroundAsia/ $
@@ -32,7 +42,11 @@ Python version 3.6 or greater is required.
     ```
     java -jar openapi-generator-cli-4.3.1.jar generate -i openapi/covid-api.yaml -o autogen -g python-flask
    ```
-5. Run local server on your machine by this command.
+5. Install all requirements.
+   ```
+   pip install -r requirements.txt
+   ```
+6. Run a local server on your machine by this command.
    
    For Unix:
     ```
@@ -43,8 +57,8 @@ Python version 3.6 or greater is required.
    ```
    py app.py
    ```
-   The server will running on default configuration on http://localhost:8080/.
-6. Open second window command line. Open GraphQL accessible by this command.
+   The server will run on default configuration on http://localhost:8080/.
+7. Open second window command line. Open GraphQL accessible by this command.
     ```
    openapi-to-graphql --cors -u http://localhost:8080/covid-api/v1/ openapi/covid-api.yaml
    ```
@@ -73,7 +87,6 @@ Python version 3.6 or greater is required.
    ```  
 2. Open `Home-Page.html` in any choice of your browser.
 3. Enjoy using web-app
-* You need to open 
 
 ## Team members
 

@@ -119,8 +119,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Covid19CountryNew'
+          links:
+            currencyRate:
+              operationId: controller.get_currency_rate_in_specific_country
+              parameters:
+                countryName: $response.body#/countryName
 
-  /currencyRates/{countryName}:
+  /currencyRates/details/{countryName}:
     parameters:
       - name: countryName
         in: path
@@ -139,6 +144,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Currency'
+          links:
+            newCase:
+              operationId: controller.get_new_covid19_situation_in_specific_country
+              parameters:
+                countryName: $request.path.countryName
 
   /currencyRates/unit/{countryName}:
     parameters:

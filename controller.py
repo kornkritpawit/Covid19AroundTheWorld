@@ -82,8 +82,7 @@ def get_new_covid19_situation_in_specific_country(countryName):
         WHERE Covid19.CountryAlpha3 = Country.CountryAlpha3
         AND CountryName=%s  
         ORDER BY `Covid19`.`Date`  ASC
-        """, countryName)
-        print(countryName)
+        """, [countryName])
         result = [models.Covid19CountryNew(*row) for row in cs.fetchall()]
         return result
 

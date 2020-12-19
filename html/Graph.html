@@ -131,7 +131,7 @@
             </form>
 
         </div>
-        <h2 class="u-custom-font u-font-roboto-slab u-text u-text-2">Thailand</h2>
+        <h2 class="u-custom-font u-font-roboto-slab u-text u-text-2"></h2>
         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
             <div class="u-gutter-0 u-layout">
                 <div class="u-layout-col">
@@ -139,7 +139,6 @@
                         <div class="u-container-layout u-container-layout-1">
                             <div id="myDiv" style="width:600px;height:250px;"></div>
                             <div id="myDiv2" style="width:600px;height:250px;"></div>
-                            <div id="myDiv3" style="width:600px;height:250px;"></div>
                         </div>
                     </div>
                 </div>
@@ -176,34 +175,32 @@
   
 <script>
 
-$(document).ready(function () {
-      $('form').submit(function (e) {
-        e.preventDefault();
-        var cname = $('#name-ef64').val();
-        const cnameCap = cname.charAt(0).toUpperCase() + cname.slice(1)
-        createNewCasesChart(cnameCap);
-        createCurrencyChart(cnameCap);
-    })
-});
-async function createNewCasesChart(input) {
-  var dataNewCases =[{
-        x: [],
-        y: [],
-        type: 'line'
-    }]
-  var dataNewDeaths =[{
-        x: [],
-        y: [],
-        type: 'line'
-    }]
-    var resp = await fetch('http://localhost:3000/graphql', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    },
-    body: JSON.stringify({
-        query: `{
+    $(document).ready(async function () {
+        $('form').submit(async function (e) {
+            e.preventDefault();
+
+            var cname = $('#name-ef64').val();
+            const cnameCap = cname.charAt(0).toUpperCase() + cname.slice(1)
+
+            createNewCasesChart(cnameCap);
+            createCurrencyChart(cnameCap);
+
+
+        })
+    });
+
+    
+
+    async function createNewCasesChart(input) {
+
+        var resp = await fetch('http://localhost:3000/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query: `{
     covid19SituationNewCase(countryName: "${input}") {
         countryId
         countryName
@@ -218,55 +215,60 @@ async function createNewCasesChart(input) {
         var table = json.data;
         var config = {responsive: true};
 
+
+        var dataNewDeaths = {
+        x: [],
+        y: [],
+        mode: 'lines',
+        type: 'line',
+        name:'New Deaths'
+    }
+    var dataNewCases = {
+        x: [],
+        y: [],
+        mode: 'lines',
+        type: 'line',
+        name:'New Cases'
+    }
+
         table.covid19SituationNewCase.forEach((el) => {
-            dataNewCases[0].x.push(el.date)
-            dataNewCases[0].y.push(el.newCases)
+            dataNewCases.x.push(el.date)
+            dataNewCases.y.push(el.newCases)
         })
 
         table.covid19SituationNewCase.forEach((el) => {
-            dataNewDeaths[0].x.push(el.date)
-            dataNewDeaths[0].y.push(el.newDeath)
+            dataNewDeaths.x.push(el.date)
+            dataNewDeaths.y.push(el.newDeath)
 
         })
 
-        var layout2 = {
-            title: 'New Covid-19 Cases in ' + input,
+        var layout_situation = {
+            title: 'Situation of Covid-19 in ' + input,
             xaxis: {
                 title: 'Date'
             },
             yaxis: {
                 title: 'New Cases',
-                range: [0, Math.max([0].x)]
+                range: [0, Math.max(dataNewCases.y)]
             }
-
         };
-        var layout = {
-            title: 'New Covid-19 Deaths in ' + input,
-            xaxis: {
-                title: 'Date'
-            },
-            yaxis: {
-                title: 'New Deaths',
-                range: [0, Math.max([0].x)]
-            }
+        
+        var all = [dataNewCases,dataNewDeaths]
+        Plotly.newPlot('myDiv', all,layout_situation, config);
+    }
 
-}
-async function createCurrencyChart(input) {
-    var dataNewCurrencies =[{
-        x: [],
-        y: [],
-        type: 'line'
-    }]
-    var resp = await fetch('http://localhost:3000/graphql', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    },
-    body: JSON.stringify({
-        query: `
+    async function createCurrencyChart(input) {
+
+        var resp = await fetch('http://localhost:3000/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query: `
     {
-    currencyRate(countryName: "${input}") {
+        currencyRatesDetail(countryName: "${input}") {
     countryId
     countryName
     currencyRates
@@ -276,31 +278,37 @@ async function createCurrencyChart(input) {
    }`
             })
         });
+        var dataNewCurrencies = [{
+        x: [],
+        y: [],
+        mode: 'lines',
+        type: 'line',
+        name:'dataNewCurrencies'
+    }]
         var json = await resp.json();
         var table = json.data;
         var config = {responsive: true};
-        table.currencyRate.forEach((el) => {
+        table.currencyRatesDetail.forEach((el) => {
             dataNewCurrencies[0].x.push(el.date)
             dataNewCurrencies[0].y.push(el.currencyRates)
 
         })
+
         var layout = {
             title: 'Currency Rates in ' + input,
             xaxis: {
                 title: 'Date'
             },
             yaxis: {
-                title: 'New Cases',
-                range: [0, Math.max([0].x)]
+                title: 'Currency Rates',
+                range: [0, Math.max(dataNewCurrencies[0].y)]
             }
 
         };
 
-        Plotly.newPlot('myDiv3', dataNewCurrencies, layout, config);
-    }
+        Plotly.newPlot('myDiv2', dataNewCurrencies, layout, config);
+    }      
 
-    Plotly.newPlot('myDiv3', dataNewCurrencies, layout, config);
-}      
 
 </script>
 
