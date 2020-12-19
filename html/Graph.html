@@ -189,34 +189,32 @@
         })
     });
 
-    
+async function createNewCasesChart(input) {
 
-    async function createNewCasesChart(input) {
-
-        var resp = await fetch('http://localhost:3000/graphql', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({
-                query: `{
-    covid19SituationNewCase(countryName: "${input}") {
+    var resp = await fetch('http://localhost:3000/graphql', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            query: `{
+        covid19SituationNewCase(countryName: "${input}") {
         countryId
         countryName
         date
         newCases
         newDeath
-        } 
+    } 
     }`
             })
         });
-        var json = await resp.json();
-        var table = json.data;
-        var config = {responsive: true};
+    var json = await resp.json();
+    var table = json.data;
+    var config = {responsive: true};
 
 
-        var dataNewDeaths = {
+    var dataNewDeaths = {
         x: [],
         y: [],
         mode: 'lines',
@@ -231,30 +229,30 @@
         name:'New Cases'
     }
 
-        table.covid19SituationNewCase.forEach((el) => {
-            dataNewCases.x.push(el.date)
-            dataNewCases.y.push(el.newCases)
-        })
+    table.covid19SituationNewCase.forEach((el) => {
+        dataNewCases.x.push(el.date)
+        dataNewCases.y.push(el.newCases)
+    })
 
-        table.covid19SituationNewCase.forEach((el) => {
-            dataNewDeaths.x.push(el.date)
-            dataNewDeaths.y.push(el.newDeath)
+    table.covid19SituationNewCase.forEach((el) => {
+        dataNewDeaths.x.push(el.date)
+        dataNewDeaths.y.push(el.newDeath)
 
-        })
+    })
 
-        var layout_situation = {
-            title: 'Situation of Covid-19 in ' + input,
-            xaxis: {
-                title: 'Date'
-            },
-            yaxis: {
-                title: 'New Cases',
-                range: [0, Math.max(dataNewCases.y)]
-            }
-        };
-        
-        var all = [dataNewCases,dataNewDeaths]
-        Plotly.newPlot('myDiv', all,layout_situation, config);
+    var layout_situation = {
+        title: 'Situation of Covid-19 in ' + input,
+        xaxis: {
+            title: 'Date'
+        },
+        yaxis: {
+            title: 'New Cases',
+            range: [0, Math.max(dataNewCases.y)]
+        }
+    };
+    
+    var all = [dataNewCases,dataNewDeaths]
+    Plotly.newPlot('myDiv', all,layout_situation, config);
     }
 
     async function createCurrencyChart(input) {

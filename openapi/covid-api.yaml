@@ -116,7 +116,6 @@ paths:
           content:
             application/json:
               schema:
-                type: array
                 items:
                   $ref: '#/components/schemas/Covid19CountryNew'
           links:
@@ -141,14 +140,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
                 items:
                   $ref: '#/components/schemas/Currency'
           links:
             newCase:
               operationId: controller.get_new_covid19_situation_in_specific_country
               parameters:
-                countryName: $request.path.countryName
+                countryName: $response.body#/countryName
 
   /currencyRates/unit/{countryName}:
     parameters:
