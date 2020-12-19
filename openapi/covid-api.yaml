@@ -206,20 +206,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/Covid19CompareCurrency'
 
-  /lastest/allCountryPopulation:
-    get:
-      summary: Returns a list of population of all countries 
-      operationId: controller.get_countries_population
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Population'
-
 components:
   schemas:
     Country:
@@ -336,17 +322,5 @@ components:
         currencyRate:
           type: integer
         newCase:
-          type: string
-
-    Population:
-      type: object
-      properties:
-        countryId:
-          type: integer
-        population:
-          type: integer
-        countryName:
-          type: string
-        date:
           type: string
         

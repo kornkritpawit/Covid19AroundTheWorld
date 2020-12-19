@@ -147,13 +147,3 @@ def get_latest_covid19_by_continent(cont):
         """, cont)
         result = [models.Covid19Continent(*row) for row in cs.fetchall()]
         return result
-
-def get_countries_population():
-    with db_cursor() as cs:
-        cs.execute("""
-        SELECT Country.CountryID,Population,Location, MAX(Covid19.Date) as Date FROM Covid19 INNER JOIN Country WHERE Country.CountryAlpha3 = Covid19.CountryAlpha3  
-        GROUP BY Country.CountryID,Population,Location  
-        ORDER BY `Country`.`CountryID` ASC
-        """)
-        result = [models.Population(*row) for row in cs.fetchall()]
-        return result
