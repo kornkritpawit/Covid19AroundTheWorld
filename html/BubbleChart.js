@@ -69,7 +69,13 @@ async function getCovidCase() {
         title: 'Infected and Population in each country',
         showlegend: false,
         height: 600,
-        width: 900
+        width: 900,
+        xaxis: {
+            title: 'Population'
+        },
+        yaxis: {
+            title: 'Total Cases'
+        }
     };
 
     Plotly.newPlot('myDiv', plotData, layout);
