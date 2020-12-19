@@ -70,9 +70,9 @@ async function getCovidCase() {
         text: unpackTotalCases(country, country2),
 
         colorscale: [
-            [0,'rgb(5, 10, 172)'],[0.3,'rgb(40, 60, 190)'],
-            [0.5,'rgb(70, 100, 245)'], [0.7,'rgb(90, 120, 245)'],
-            [0.9,'rgb(106, 137, 247)'],[1,'rgb(155,165,202)']],
+            [0,'rgb(145,3,3)'],[0.3,'rgb(190,40,40)'],
+            [0.5,'rgb(245,70,70)'], [0.7,'rgb(231,117,117)'],
+            [0.9,'rgb(231,130,130)'],[1,'rgb(219,193,193)']],
         autocolorscale: false,
         reversescale: true
     }];

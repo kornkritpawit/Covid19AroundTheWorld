@@ -1,9 +1,28 @@
-function unpack(rows, key) {
-    return rows.map(function (row) {
-        return row[key];
-    });
-}
+function intoArray(data) {
+    const populationArray = [];
+    const totalCasesArray = [];
+    const textArray = [];
+    const colorArray = [];
 
+    for (let i = 0; i < data.length; i++) {
+        populationArray.push(data[i].population);
+        totalCasesArray.push(data[i].totalCases);
+        textArray.push(data[i].countryName + "<br>"
+            + "Total Cases: " +  data[i].totalCases + "<br>"
+            + "Population: " + data[i].population + "<br>"
+            + "Cases per 1 million: " + Math.round(data[i].totalCases / data[i].population * 1000000)
+        );
+        if ((data[i].totalCases / data[i].population) < 0.001) {
+            colorArray.push('rgb(44, 160, 101)');
+        } else if ((data[i].totalCases / data[i].population) < 0.01) {
+            colorArray.push('rgb(255, 144, 14)');
+        } else {
+            colorArray.push('rgb(255, 65, 54)');
+        }
+    }
+
+    return [populationArray, totalCasesArray, textArray, colorArray]
+}
 
 async function getCovidCase() {
     const resp = await fetch('http://localhost:3000/graphql', {
@@ -14,43 +33,46 @@ async function getCovidCase() {
         },
         body: JSON.stringify({
             query: `
-            {
-                covid19SituationSummaryAllCountry {
-                    countryName
-                    totalDeathCases
+                {
+                    covid19SituationSummaryAllCountry {
+                        countryName
+                        population
+                        totalCases
+                    }
                 }
-            }`
+            `
         })
     });
-    console.log(resp)
     const json = await resp.json();
-    console.log(json)
-    let country = json.data.covid19SituationSummaryAllCountry;
-    console.log(country)
-    const data = [{
-        type: 'choropleth',
-        locationmode: 'country names',
-        locations: unpack(country, 'countryName'),
-        z: unpack(country, 'totalDeathCases'),
-        text: unpack(country, 'countryName'),
-        colorscale: [
-            [0,'rgb(145,3,3)'],[0.3,'rgb(190,40,40)'],
-            [0.5,'rgb(245,70,70)'], [0.7,'rgb(231,117,117)'],
-            [0.9,'rgb(231,130,130)'],[1,'rgb(219,193,193)']],
-        autocolorscale: false,
-        reversescale: true
-    }];
+    const data = json.data.covid19SituationSummaryAllCountry;
 
-    const layout = {
-        title: 'Hover cursor over the map to see all-time death people by country.',
-        geo: {
-            projection: {
-                type: 'robinson'
-            }
+    const array = intoArray(data);
+    const populationArray = array[0],
+        totalCasesArray = array[1],
+        countryNameArray = array[2],
+        colorArray = array[3];
+
+    const trace1 = {
+        x: populationArray,
+        y: totalCasesArray,
+        text: countryNameArray,
+        mode: 'markers',
+        marker: {
+            size: Array(populationArray.length).fill(20),
+            color: colorArray
         }
     };
 
-    Plotly.newPlot("myDiv", data, layout, {showLink: false});
+    const plotData = [trace1];
+
+    const layout = {
+        title: 'Infected and Population in each country',
+        showlegend: false,
+        height: 600,
+        width: 900
+    };
+
+    Plotly.newPlot('myDiv', plotData, layout);
 }
 
 getCovidCase();
