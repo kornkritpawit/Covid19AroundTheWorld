@@ -4,3 +4,4 @@
 /__pycache__/
 /autogen/
 .DS_Store
+node_modules/

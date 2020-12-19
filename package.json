@@ -1,0 +1,25 @@
+{
+  "name": "Covid19AroundAsia",
+  "version": "1.0.0",
+  "description": "![Asia](https://icon-library.com/images/asia-icon/asia-icon-4.jpg)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "set": "java -jar openapi-generator-cli-4.3.1.jar generate -i openapi/covid-api.yaml -o autogen -g python-flask"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EJEunjiyaz/Covid19AroundAsia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EJEunjiyaz/Covid19AroundAsia/issues"
+  },
+  "homepage": "https://github.com/EJEunjiyaz/Covid19AroundAsia#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
