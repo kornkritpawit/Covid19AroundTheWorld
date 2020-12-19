@@ -16,25 +16,35 @@ pipeline {
                         url: 'https://github.com/kornkritpawit/Covid19AroundTheWorld.git'
                }
           }
-          stage('Build-backend') {
+          stage('Build') {
                steps {
-                   parallel(
-                       backend: {
                     sh 'java -jar openapi-generator-cli-4.3.1.jar generate -i openapi/covid-api.yaml -o autogen -g python-flask'
                     sh 'pip3 install -r requirements.txt'
-                    sh 'python3 app.py'
-                       },
-                       backendgraphql: {
                     sh 'sudo npm install -g openapi-to-graphql-cli'
-                    sh 'openapi-to-graphql --cors -u http://localhost:9090/covid-api/v1/ openapi/covid-api.yaml'
-                       },
-                       frontend: {
-                           sh 'npm install'
-                           sh 'npm start'
-                       }
-                       )
+                    sh 'npm install'
 
                }
           }
+          stage('Test') {
+               steps {
+                    echo 'testing...'
+               }
+          }
+          stage('Deploy') {
+               steps {
+                    parallel(
+                       backend: {
+                        sh 'python3 app.py'
+                       },
+                       backendgraphql: {
+                        sh 'openapi-to-graphql --cors -u http://host.docker.internal:9090/covid-api/v1/ openapi/covid-api.yaml'
+                       },
+                       frontend: {
+                           sh 'npm start'
+                       }
+                       )
+               }
+          }
+          
      }
 }
