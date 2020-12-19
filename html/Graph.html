@@ -7,7 +7,7 @@
     <meta name="keywords" content="COVID AROUND THE WORLD​​">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Graph</title>
+    <title>Graph | Covid Around The World</title>
     <link rel="stylesheet" href="nicepage.css" media="screen">
     <link rel="stylesheet" href="Graph.css" media="screen">
     <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
@@ -71,7 +71,7 @@
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="Map.html" style="padding: 10px 20px;">Infected Map</a>
+                            href="Map.html" style="padding: 10px 20px;">Map</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
@@ -79,7 +79,7 @@
                     </li>
                     <li class="u-nav-item"><a
                             class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                            href="Map2.html" style="padding: 10px 20px;">Death Map</a>
+                            href="BubbleChart.html" style="padding: 10px 20px;">Bubble Chart</a>
                     </li>
                 </ul>
             </div>
@@ -91,11 +91,11 @@
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home-Page.html">Home
                                 Page</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Graph.html">Graph</a>
-                            </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Map.html">Map</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Table.html">Table</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Graph.html">Graph</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="BubbleChart.html">Bubble Chart</a>
                             </li>
                         </ul>
                     </div>
@@ -110,7 +110,7 @@
 </header>
 <section class="u-clearfix u-palette-3-light-3 u-section-1" id="sec-1a8a">
     <div class="u-clearfix u-sheet u-sheet-1">
-        <h1 class="u-align-center u-custom-font u-font-roboto-slab u-text u-title u-text-1">Covid-19 Analyzing
+        <h1 class="u-align-center u-custom-font u-font-roboto-slab u-text u-title u-text-1">Covid-19 and Currency
             Graph</h1>
         <div class="u-form u-form-1" id="app">
 
@@ -158,7 +158,7 @@
 <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-50e7">
     <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-custom-font u-font-roboto-slab u-text u-text-default u-text-1"><b>DAQ Project:
-            Covid19AroundWorld</b>
+            Covid19AroundTheWorld</b>
         </p>
         <div class="u-border-6 u-border-white u-line u-line-horizontal u-line-1"></div>
     </div>
@@ -302,7 +302,7 @@ async function createNewCasesChart(input) {
                 title: 'Date'
             },
             yaxis: {
-                title: 'Currency Rates',
+                title: 'Currency Rates (Per Euro €)',
                 range: [0, Math.max(dataNewCurrencies[0].y)]
             }
 
