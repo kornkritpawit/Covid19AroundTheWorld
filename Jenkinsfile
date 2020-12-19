@@ -13,7 +13,7 @@ pipeline {
           stage('Source') {
                steps {
                     git branch: 'master',
-                        url: 'https://github.com/kornkritpawit/covidSoftpro.git'
+                        url: 'https://github.com/kornkritpawit/Covid19AroundTheWorld.git'
                }
           }
           stage('Build-backend') {
